@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     private CharacterController controller;
     public Vector3 dir;
     [SerializeField] private int speed;
+    [SerializeField] private GameObject PanelLose;
 
     private int lineToMove = 1;
     public float lineDistance = 3;
@@ -43,6 +44,29 @@ public class PlayerController : MonoBehaviour
         else if (lineToMove == 1)
             targetPosition += Vector3.right * lineDistance;
 
-        transform.position = targetPosition;
+        if (transform.position == targetPosition)
+        {
+            return;
+        }
+        Vector3 diff = targetPosition - transform.position;
+        Vector3 moveDir = diff.normalized * 25 * Time.deltaTime;
+        if (moveDir.sqrMagnitude < diff.sqrMagnitude)
+        {
+            controller.Move(moveDir);
+        }
+        else 
+        {
+            controller.Move(diff);
+        }
     }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.gameObject.tag == "handshit")
+        {
+            PanelLose.SetActive(true);
+            Time.timeScale = 0;
+        }
+    }
+
 }
