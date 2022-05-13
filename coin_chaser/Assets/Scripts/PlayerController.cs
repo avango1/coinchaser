@@ -9,12 +9,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int speed;
     [SerializeField] private GameObject PanelLose;
 
+
     private int lineToMove = 1;
     public float lineDistance = 3;
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        Time.timeScale = 1; 
     }
 
     void FixedUpdate()
@@ -62,7 +64,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (hit.gameObject.tag == "handshit")
+
+        if (hit.gameObject.tag == "solidshiii")
         {
             PanelLose.SetActive(true);
             Time.timeScale = 0;
