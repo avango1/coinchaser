@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     public Vector3 dir;
     [SerializeField] private int speed;
     [SerializeField] private GameObject PanelLose;
-
+    [SerializeField] private Score scoreScript;
 
     private int lineToMove = 1;
     public float lineDistance = 3;
@@ -68,6 +68,8 @@ public class PlayerController : MonoBehaviour
         if (hit.gameObject.tag == "solidshiii")
         {
             PanelLose.SetActive(true);
+            int LastRunScore = int.Parse(scoreScript.scoreText.text.ToString());
+            PlayerPrefs.SetInt("LastRunScore", LastRunScore);
             Time.timeScale = 0;
         }
     }

@@ -9,8 +9,6 @@ public class HandsLeft : MonoBehaviour
     {
         speed = Random.Range(5f, 20);
     }
-
-    // Update is called once per frame
     void Update()
     {
         transform.Translate(speed * Time.deltaTime, 0, 0, Space.World);
